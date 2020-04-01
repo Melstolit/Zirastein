@@ -6,8 +6,7 @@ namespace Melstolit.Zirastein.Core
     {
         static void Main(string[] args)
         {
-            Application app = new Application();
-            app.Run();
+            Application.Run();
         }
     }
 }
