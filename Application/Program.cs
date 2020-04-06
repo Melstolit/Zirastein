@@ -169,8 +169,8 @@ namespace Microsoft.Quantum.Chemistry.Samples.Hydrogen
                 Console.WriteLine("----- Performing quantum energy estimation by Qubitization simulation algorithm");
                 for (int i = 0; i < 1; i++)
                 {
-                    // EstimateEnergyByTrotterization
-                    // Name shold make clear that it does it by trotterized
+                    // EstimateEnergyByQubitization
+                    // Name shold make clear that it does it by Qubitization
                     var (phaseEst, energyEst) = GetEnergyByQubitization.Run(qsim, qSharpData, bits).Result;
 
                     Console.WriteLine($"Rep #{i+1}/1: Energy estimate: {energyEst}; Phase estimate: {phaseEst}");
