@@ -59,7 +59,7 @@ namespace Microsoft.Quantum.Chemistry.Samples.Hydrogen
 
             // One of the simplest representations of Hydrogen uses only two 
             // molecular orbitals indexed by `0` and `1`.
-            var nOrbitals = 2;
+            //var nOrbitals = 2;
 
             // This representation also has two occupied spin-orbitals.
             var nElectrons = 2;
