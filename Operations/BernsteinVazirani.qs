@@ -1,5 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT license.
+﻿// Wikipedia.org - Demonstrates the Bernstein–Vazirani algorithm.
 
 namespace Melstolit.Zirastein.Operations {
 
@@ -25,7 +24,7 @@ namespace Melstolit.Zirastein.Operations {
         return ResultArrayAsBoolArray(resultArray);
 	}
 
-    operation _make_oracle(input_qubits : Qubit[], output_qubit : Qubit, secret_factor_bits : Bool[], secret_bias_bit : Bool) : Unit
+    operation _make_boracle(input_qubits : Qubit[], output_qubit : Qubit, secret_factor_bits : Bool[], secret_bias_bit : Bool) : Unit
     {
         if (secret_bias_bit){
 			X(output_qubit);
@@ -38,19 +37,19 @@ namespace Melstolit.Zirastein.Operations {
         }
 	}
 
-    function make_oracle(secret_factor_bits : Bool[], secret_bias_bit : Bool) : ((Qubit[], Qubit) => Unit)
+    function make_boracle(secret_factor_bits : Bool[], secret_bias_bit : Bool) : ((Qubit[], Qubit) => Unit)
     {
-        return _make_oracle(_, _, secret_factor_bits, secret_bias_bit);
+        return _make_boracle(_, _, secret_factor_bits, secret_bias_bit);
 	}
 
-    operation BersteinVariationAlgorithm () : Bool[] {
+    operation BersteinVaziraniAlgorithm () : Bool[] {
         let nQubits = 8;
 
         using ((input_qubits , output_qubit ) = (Qubit[nQubits], Qubit())) {
             let secret_bias_bit = RandomInt(2) == 1 ? true | false;
             let secret_factor_bits = IntAsBoolArray(RandomInt(63), nQubits);
 
-            let oracle = make_oracle(secret_factor_bits, secret_bias_bit);
+            let oracle = make_boracle(secret_factor_bits, secret_bias_bit);
             let temporary = make_bernstein_vazirani_circuit(input_qubits, output_qubit, secret_factor_bits, secret_bias_bit, oracle);
 
             return temporary;

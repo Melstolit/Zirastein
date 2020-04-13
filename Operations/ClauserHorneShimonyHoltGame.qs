@@ -1,9 +1,12 @@
-﻿namespace Melstolit.Zirastein.Operations {
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+namespace Melstolit.Zirastein.Operations {
 
     open Microsoft.Quantum.Math;
     open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Convert;
-    open Microsoft.Quantum.Diagnostics;
+    //open Microsoft.Quantum.Diagnostics;
 
 
     function WinCondition (x : Bool, y : Bool, a : Bool, b : Bool) : Bool {

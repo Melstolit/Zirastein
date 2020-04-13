@@ -178,11 +178,6 @@ namespace Microsoft.Quantum.Chemistry.Samples.Hydrogen
                 Console.WriteLine("----- End Performing quantum energy estimation by Qubitization simulation algorithm\n");
             }
 
-            Console.WriteLine("Press Enter to continue...");
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                Console.ReadLine();
-            }
             #endregion
         }
     }
