@@ -1,4 +1,7 @@
-﻿namespace Melstolit.Zirastein.Operations {
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+namespace Melstolit.Zirastein.Operations {
 
     open Microsoft.Quantum.Arrays;
     open Microsoft.Quantum.Canon;
@@ -81,7 +84,6 @@
             // the result is already contained in resultArray and not further
             // post-processing is necessary except for a conversion from Result[] to
             // Bool[] for which we use a canon function (from TypeConversion.qs).
-            Message($"measured: {resultArray}");
             return ResultArrayAsBoolArray(resultArray);
         }
     }
@@ -178,10 +180,9 @@
         let u = 2;
         let nQubits = 4;
 
-
         // The integer patternInt is converted to a bit pattern
         // using a canon function (from Utils.qs)
-        let pattern = IntAsBoolArray(RandomInt(31), nQubits);
+        let pattern = IntAsBoolArray(RandomInt(7), nQubits);
 
         return HiddenShiftBentCorrelation(
             InnerProductBentFunction(u),

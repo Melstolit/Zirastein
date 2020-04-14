@@ -1,4 +1,6 @@
-﻿namespace Melstolit.Zirastein.Operations {
+﻿// Microsoft Quantum Katas - Demonstrates the Simon algorithm.
+
+namespace Melstolit.Zirastein.Operations {
 
     open Microsoft.Quantum.Arrays;
     open Microsoft.Quantum.Canon;
@@ -7,7 +9,26 @@
     open Microsoft.Quantum.Math;
     open Microsoft.Quantum.Measurement;
 
-
+    // Quantum part of Simon's algorithm
+    // Inputs:
+    //      1) the number of qubits in the input register N for the function f
+    //      2) a quantum operation which implements the oracle |x⟩|y⟩ -> |x⟩|y ⊕ f(x)⟩, where
+    //         x is N-qubit input register, y is N-qubit answer register, and f is a function
+    //         from N-bit strings into N-bit strings
+    //
+    // The function f is guaranteed to satisfy the following property:
+    // there exists some N-bit string s such that for all N-bit strings b and c (b != c)
+    // we have f(b) = f(c) if and only if b = c ⊕ s. In other words, f is a two-to-one function.
+    //
+    // An example of such function is bitwise right shift function from task 1.2;
+    // the bit string s for it is [0, ..., 0, 1].
+    //
+    // Output:
+    //      Any bit string b such that Σᵢ bᵢ sᵢ = 0 modulo 2.
+    //
+    // Note that the whole algorithm will reconstruct the bit string s itself, but the quantum part of the
+    // algorithm will only find some vector orthogonal to the bit string s. The classical post-processing
+    // part is already implemented, so once you implement the quantum part, the tests will pass.
     operation make_simon_circuit(x : Qubit[], y : Qubit[], nQubits : Int, oracle : ((Qubit[], Qubit[]) => Unit)) : Bool[]
     {
         ApplyToEach(H, x);
@@ -26,6 +47,16 @@
         return j;
 	}
 
+    // Multidimensional linear operator
+    // Inputs:
+    //      1) N1 qubits in an arbitrary state |x⟩ (input register)
+    //      2) N2 qubits in an arbitrary state |y⟩ (output register)
+    //      3) an N2 x N1 matrix (represented as an Int[][]) describing operator A
+    //         (see https://en.wikipedia.org/wiki/Transformation_matrix ).
+    //         The first dimension of the matrix (rows) corresponds to the output register,
+    //         the second dimension (columns) - the input register,
+    //         i.e., A[r][c] (element in r-th row and c-th column) corresponds to x[c] and y[r].
+    // Goal: Transform state |x, y⟩ into |x, y ⊕ A(x) ⟩ (⊕ is addition modulo 2).
     operation _make_soracle(x : Qubit[], y : Qubit[], A : Int[][]) : Unit
     {
         let N1 = Length(y);
@@ -61,6 +92,14 @@
         return matrix;
 	}
 
+    // "Simon's Algorithm" kata is an exercise designed to teach a quantum algorithm for
+    // a problem of identifying a bit string that is implicitly defined (or, in other words, "hidden") by
+    // some oracle that satisfies certain conditions. It is arguably the most simple case of an (oracle)
+    // problem for which a quantum algorithm has a *provable* exponential advantage over any classical algorithm.
+    
+    // Each task is wrapped in one operation preceded by the description of the task. Each task (except tasks in
+    // which you have to write a test) has a unit test associated with it, which initially fails. Your goal is to
+    // fill in the blank (marked with // ... comment) with some Q# code to make the failing test pass.
     operation SimonAlgorithm () : Bool[] {
         
         let nQubits = 8;
